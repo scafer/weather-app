@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             mc:Ignorable="d"
+             x:Class="weather.Views.WeatherPage" Title="Weather">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="localName" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black"/>
+            <Label x:Name="updatedAt" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black"/>
+
+            <BoxView HeightRequest="1" Color="Black" Margin="0,20"/>
+
+            <StackLayout x:Name="todayBoard" HorizontalOptions="Center">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="hot.png" VerticalOptions="Center" WidthRequest="25"/>
+                    <Label Text="{Binding tMax, StringFormat='{0}ºC'}" FontSize="Title" TextColor="Black"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="cold.png" VerticalOptions="Center" WidthRequest="25"/>
+                    <Label Text="{Binding tMin, StringFormat='{0}ºC'}" FontSize="Title" TextColor="Black"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="rain.png" VerticalOptions="Center" WidthRequest="25"/>
+                    <Label Text="{Binding precipitaProb, StringFormat='{0}%'}" FontSize="Title" TextColor="Black"/>
+                </StackLayout>
+            </StackLayout>
+
+            <BoxView HeightRequest="1" Color="Black" Margin="0,20"/>
+
+            <ScrollView>
+                <StackLayout>
+                    <microcharts:ChartView x:Name="chartView" HeightRequest="200"/>
+                    <ListView x:Name="listView" HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout>
+                                        <Label Text="{Binding forecastDate, StringFormat='Date: {0}'}" TextColor="Black"/>
+                                        <Label Text="{Binding tMax, StringFormat='Max: {0}ºC'}" TextColor="Black"/>
+                                        <Label Text="{Binding tMin, StringFormat='Min: {0}ºC'}" TextColor="Black"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ScrollView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
